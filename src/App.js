@@ -9,12 +9,17 @@ class App extends React.Component {
   constructor(){
     super();
     this.state={
-      todos: [{
-        task: 'Test',
-        id: Date.now(),
-        completed: false
-      }]
+      todos: localStorage.getItem('tasks') ? JSON.parse(localStorage.getItem('tasks')) : []
     }
+  }
+
+  componentDidMount(){
+    !localStorage.getItem('tasks') 
+      && localStorage.setItem('tasks', JSON.stringify(this.state.todos)) 
+  }
+
+  componentDidUpdate(){
+    localStorage.setItem('tasks', JSON.stringify(this.state.todos))
   }
 
   addTodo = todoTask => {
@@ -26,6 +31,8 @@ class App extends React.Component {
     this.setState({
       todos: [...this.state.todos, newTodo]
     })
+
+    // localStorage.setItem('tasks', JSON.stringify(this.state.tasks))
   }
 
   toggleCompleted = id => {

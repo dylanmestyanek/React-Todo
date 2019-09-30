@@ -7,6 +7,7 @@ class TodoList extends React.Component {
     render(){
         return (
             <TodoContainer>
+                {!this.props.todos.length && <h3>No tasks currently</h3>}
                 {
                     this.props.todos.map(todo => <Todo todo={todo} toggleCompleted={this.props.toggleCompleted} />)
                     
@@ -26,4 +27,9 @@ const TodoContainer = styled.div`
     font-size: 1.5rem;
     line-height: 2;
     border-radius: 5px;
+
+    h3 {
+        font-size: 1.7rem;
+        font-family: 'Roboto', sans-serif;
+    }
 `;
